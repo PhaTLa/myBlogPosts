@@ -1,6 +1,6 @@
 +++
 date = '2025-10-08T10:30:00+07:00'
-draft = false
+draft = true
 title = 'Building Production-Ready Kubernetes Clusters on AWS EKS'
 description = "A comprehensive guide to setting up production-grade Amazon EKS clusters with best practices for security, networking, and observability."
 author = 'Phạm Tùng Lâm'
@@ -11,6 +11,10 @@ series = ['AWS EKS Deep Dive']
 featured = true
 toc = true
 +++
+
+<p align="center">
+    <img src="https://pub-012e0e3c1b2643639bffe9b7fd5624e5.r2.dev/homelab.jpg" alt="Phạm Tùng Lâm Homelab" title="DevOps Engineer & Solution Architect" style="width:100%; height:240px; object-fit:cover; box-shadow:0 2px 8px rgba(0,0,0,0.1);" />
+</p>
 
 # Building Production-Ready Kubernetes Clusters on AWS EKS
 
