@@ -1,6 +1,6 @@
 +++
 date = '2025-10-01T14:39:29+07:00'
-draft = false
+draft = true
 title = 'About Me'
 description = "The professional journey of Phạm Tùng Lâm - a DevOps Engineer aspiring to become a Solution Architect, detailing experience with AWS, Kubernetes, CI/CD, and more."
 author = 'Phạm Tùng Lâm'
@@ -11,8 +11,9 @@ featured = true
 +++
 
 # About Phạm Tùng Lâm
-
-{{< figure src="/images/profile.jpg" alt="Phạm Tùng Lâm" title="DevOps Engineer & Solution Architect" >}}
+<p align="center">
+    <img src="https://pub-012e0e3c1b2643639bffe9b7fd5624e5.r2.dev/avatar_400x400.png" alt="Phạm Tùng Lâm" title="DevOps Engineer & Solution Architect" style="width:240px; height:240px; border-radius:50%; object-fit:cover; box-shadow:0 2px 8px rgba(0,0,0,0.1);" />
+</p>
 
 ## DevOps Engineer & Solution Architect
 
