@@ -1,6 +1,6 @@
 +++
 date = '2025-10-01T14:39:29+07:00'
-draft = true
+draft = false
 title = 'About Me'
 description = "The professional journey of Phạm Tùng Lâm - a DevOps Engineer aspiring to become a Solution Architect, detailing experience with AWS, Kubernetes, CI/CD, and more."
 author = 'Phạm Tùng Lâm'
