@@ -1,0 +1,47 @@
+name: Trigger Blog Site Update
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  trigger-webhook:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      
+      - name: Get latest commit SHA
+        id: get-sha
+        run: |
+          COMMIT_SHA=$(git rev-parse HEAD)
+          echo "commit_sha=$COMMIT_SHA" >> $GITHUB_OUTPUT
+          echo "Latest commit SHA: $COMMIT_SHA"
+      
+      - name: Trigger webhook
+        run: |
+          curl -X POST \
+            -H "Accept: application/vnd.github.v3+json" \
+            -H "Authorization: token ${{ secrets.ACTION_AUTH_TOKEN }}" \
+            -H "Content-Type: application/json" \
+            -d '{
+              "event_type": "update-posts-sha",
+              "client_payload": {
+                "commit_sha": "${{ steps.get-sha.outputs.commit_sha }}"
+              }
+            }' \
+            https://api.github.com/repos/PhaTLa/myBlogSite/dispatches
+      
+      - name: Webhook result
+        run: |
+          if [ $? -eq 0 ]; then
+            echo "✅ Webhook triggered successfully"
+          else
+            echo "❌ Webhook failed"
+            exit 1
+          fi
