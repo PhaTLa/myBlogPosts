@@ -25,7 +25,9 @@ jobs:
       
       - name: Trigger webhook
         run: |
-          curl -X POST \
+          echo "Triggering webhook with commit SHA: ${{ steps.get-sha.outputs.commit_sha }}"
+          
+          response=$(curl -s -w "\n%{http_code}" -X POST \
             -H "Accept: application/vnd.github.v3+json" \
             -H "Authorization: token ${{ secrets.ACTION_AUTH_TOKEN }}" \
             -H "Content-Type: application/json" \
@@ -35,13 +37,19 @@ jobs:
                 "commit_sha": "${{ steps.get-sha.outputs.commit_sha }}"
               }
             }' \
-            https://api.github.com/repos/PhaTLa/myBlogSite/dispatches
-      
-      - name: Webhook result
-        run: |
-          if [ $? -eq 0 ]; then
-            echo "✅ Webhook triggered successfully"
+            https://api.github.com/repos/PhaTLa/myBlogSite/dispatches)
+          
+          # Extract response body and status code
+          response_body=$(echo "$response" | head -n -1)
+          status_code=$(echo "$response" | tail -n 1)
+          
+          echo "HTTP Status Code: $status_code"
+          echo "Response Body: $response_body"
+          
+          if [ "$status_code" -eq 204 ]; then
+            echo "✅ Webhook triggered successfully (HTTP 204)"
           else
-            echo "❌ Webhook failed"
+            echo "❌ Webhook failed with status code: $status_code"
+            echo "Response: $response_body"
             exit 1
           fi
